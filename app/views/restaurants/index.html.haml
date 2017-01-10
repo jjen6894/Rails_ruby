@@ -1,2 +1,8 @@
-No restaurants yet!
-%a{href: '#'}) Add a restaurant
+-if @restaurants.any?
+  -@restaurants.each do |restaurant|
+    %a{href: "#{restaurant_path(restaurant.id)}"}= restaurant.name
+    =link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant.id)
+-else
+  No restaurants yet!
+
+%a{href: "#{new_restaurant_path}"} Add a restaurant
