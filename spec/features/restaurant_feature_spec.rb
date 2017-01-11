@@ -39,7 +39,6 @@ feature 'restaurants' do
     scenario "user views a restaurant" do
       visit '/restaurants'
       click_link 'KFC'
-      puts current_path
       expect(page).to have_content 'KFC'
       expect(page).to have_content "filthy chick3n lmao"
       expect(current_path).to eq "/restaurants/#{kfc.id}"
@@ -59,6 +58,17 @@ feature 'restaurants' do
       expect(page).to have_content "Kentucky Fried Chicken"
       expect(page).to have_content "Deep fried goodness"
       expect(current_path).to eq restaurant_path(1)
+    end
+  end
+
+  context 'deleting restaurants' do
+    before {Restaurant.create name: "KFC", description: "Deep friend goodness"}
+
+    scenario "deleting a restaurant" do
+      visit '/restaurants'
+      click_link 'Delete KFC'
+      expect(page).not_to have_content 'KFC'
+      expect(page).to have_content 'Restaurant deleted successfully'
     end
   end
 end
