@@ -7,8 +7,11 @@ class ReviewsController < ApplicationController
 
   def create
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @restaurant.reviews.create(review_params)
-
+    if user_signed_in?
+      @restaurant.reviews.create(review_params)
+    else
+      flash[:error] = "You must be signed in to post reviews"
+    end
     redirect_to '/restaurants'
   end
 
