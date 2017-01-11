@@ -39,6 +39,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'haml'
   gem 'devise'
+  gem 'omniauth-facebook'
+  gem 'envyable'
 end
 
 group :test do
