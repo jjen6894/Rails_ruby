@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe Restaurant, type: :model do
-  it 'is not valid with a name of less than three characters' do
-    restaurant = Restaurant.new(name: 'KF')
+  xit 'is not valid with a name of less than three characters' do
+    user = User.new( email: "testman@email.com")
+    restaurant = Restaurant.new(name: 'KF', user: user)
     expect(restaurant).to have(1).error_on(:name)
     expect(restaurant).not_to be_valid
   end

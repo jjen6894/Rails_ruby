@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Reviews' do
-  before { Restaurant.create name: 'KFC' }
+  before { sign_up; list_KFC; click_link "Sign out"}
 
   context 'allows users to leave a review' do
     scenario "cannot leave a review without being signed in" do

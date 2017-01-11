@@ -11,7 +11,8 @@ feature 'restaurants' do
 
   context 'restaurants have been added' do
     before do
-      Restaurant.create(name: 'KFC')
+      sign_up
+      list_KFC
     end
 
     scenario 'diplay a list of restaurants' do
@@ -23,17 +24,15 @@ feature 'restaurants' do
 
   context 'create restaurant' do
     scenario 'user creates a restaurant' do
-      visit '/restaurants'
-      click_link 'Add a restaurant'
-      fill_in 'Name', with: "KFC"
-      fill_in 'Description', with: "filthy chick3n lmao"
-      click_button 'Create Restaurant'
+      sign_up
+      list_KFC
       expect(page).to have_content "KFC"
       expect(current_path).to eq '/restaurants'
     end
 
     context 'an invalid restaurant' do
       scenario 'does not let you submit a name that is too short' do
+        sign_up
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'KF'
@@ -45,35 +44,49 @@ feature 'restaurants' do
   end
 
   context 'viewing a restaurant' do
-    let!(:kfc){ Restaurant.create(name: 'KFC', description: "filthy chick3n lmao")}
-
+    before{ sign_up; list_KFC}
     scenario "user views a restaurant" do
       visit '/restaurants'
       click_link 'KFC'
       expect(page).to have_content 'KFC'
-      expect(page).to have_content "filthy chick3n lmao"
-      expect(current_path).to eq "/restaurants/#{kfc.id}"
+      expect(page).to have_content "Deep fried goodness"
+      expect(current_path).to include "/restaurants/"
     end
   end
 
   context 'editing restaurants' do
-    before {Restaurant.create name: 'KFC', description: "Deep fried goodness", id: 1}
+    before do
+      sign_up
+      list_KFC
+    end
 
-    scenario "editing a restaurant" do
+    scenario "user cannot edit a restaurant they haven't created" do
+      click_link 'Sign out'
+      sign_up ("testy@mctestface.com")
       visit '/restaurants'
       click_link 'Edit KFC'
       fill_in 'Name', with: 'Kentucky Fried Chicken'
       fill_in 'Description', with: 'Deep fried goodness'
       click_button 'Update Restaurant'
-      click_link 'Kentucky Fried Chicken'
+      expect(page).not_to have_content "Kentucky Fried Chicken"
+      expect(page).to have_content "You can only edit restaurants you have added"
+      expect(current_path).to eq restaurants_path
+    end
+
+    scenario "user can edit a restaurant they have created" do
+      visit '/restaurants'
+      click_link 'Edit KFC'
+      fill_in 'Name', with: 'Kentucky Fried Chicken'
+      fill_in 'Description', with: 'Deep fried goodness'
+      click_button 'Update Restaurant'
+      click_link "Kentucky Fried Chicken"
       expect(page).to have_content "Kentucky Fried Chicken"
-      expect(page).to have_content "Deep fried goodness"
-      expect(current_path).to eq restaurant_path(1)
+      expect(current_path).to include "/restaurants/"
     end
   end
 
   context 'deleting restaurants' do
-    before {Restaurant.create name: "KFC", description: "Deep friend goodness"}
+    before { sign_up; list_KFC }
 
     scenario "deleting a restaurant" do
       visit '/restaurants'
