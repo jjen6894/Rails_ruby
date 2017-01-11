@@ -23,3 +23,6 @@ config/env.yml.example
 
 env.yml
 eny.yml.example
+
+# Don't check in credentials 
+config/env.yml

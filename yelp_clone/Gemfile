@@ -41,6 +41,7 @@ group :development, :test do
   gem 'devise'
   gem 'omniauth-facebook'
   gem 'envyable'
+  
 end
 
 group :test do
