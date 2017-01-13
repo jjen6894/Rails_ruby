@@ -3502,3 +3502,113 @@ FOREIGN KEY ("review_id")
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(8692138485699695145)[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/restaurants" for ::1 at 2017-01-13 12:11:26 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.haml within layouts/application
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "restaurants"[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mReview Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "reviews" WHERE "reviews"."restaurant_id" = $1 LIMIT $2[0m  [["restaurant_id", 1], ["LIMIT", 1]]
+  Rendered restaurants/index.html.haml within layouts/application (48.0ms)
+Completed 200 OK in 276ms (Views: 251.4ms | ActiveRecord: 6.2ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-01-13 12:11:29 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (2.2ms)
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (31.0ms)
+Completed 200 OK in 96ms (Views: 72.2ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2017-01-13 12:11:31 +0000
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.6ms)
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 36ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2017-01-13 12:11:39 +0000
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d+0DSsYIh0liriZuwfPwKj7s/ejdRHEKufrbX/LdW8SL0P8/gRE5lP86OQSz2Dk/AwJFsxTvJlZoCtCbpYrNnQ==", "user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (3.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.2ms)
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 209ms (Views: 48.3ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-01-13 12:11:42 +0000
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (3.3ms)
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 62ms (Views: 59.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2017-01-13 12:11:47 +0000
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"98mv/plvdfxsuLhFMl7YfoRqheHvc9fRHTbO0jjr+jUJhuDSxfi+bv7W/Sc2EKFRBl6fIXJ2NVoVaLuUVPp6ZA==", "user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "test@test.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["current_sign_in_at", 2017-01-13 12:11:47 UTC], ["sign_in_count", 2], ["updated_at", 2017-01-13 12:11:47 UTC], ["id", 1]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 154ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2017-01-13 12:11:47 +0000
+Processing by RestaurantsController#index as HTML
+  Rendering restaurants/index.html.haml within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "restaurants"[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants"[0m
+  [1m[36mReview Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "reviews" WHERE "reviews"."restaurant_id" = $1 LIMIT $2[0m  [["restaurant_id", 1], ["LIMIT", 1]]
+  Rendered restaurants/index.html.haml within layouts/application (6.8ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 29.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/restaurants/1" for ::1 at 2017-01-13 12:11:52 +0000
+Processing by RestaurantsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRestaurant Load (1.1ms)[0m  [1m[34mSELECT  "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering restaurants/show.html.haml within layouts/application
+  Rendered restaurants/show.html.haml within layouts/application (1.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 35ms (Views: 26.2ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/restaurants/1/reviews/new" for ::1 at 2017-01-13 12:11:57 +0000
+Processing by ReviewsController#new as HTML
+  Parameters: {"restaurant_id"=>"1"}
+  [1m[36mRestaurant Load (0.7ms)[0m  [1m[34mSELECT  "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering reviews/new.html.haml within layouts/application
+  Rendered reviews/new.html.haml within layouts/application (4.9ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 54ms (Views: 38.7ms | ActiveRecord: 3.8ms)
+
+
+Started POST "/restaurants/1/reviews" for ::1 at 2017-01-13 12:12:04 +0000
+Processing by ReviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aXK8Pi6r+kzM3EhouA/wAHqLijb+EhvEuqcMy+VVLEjOtY1mYQerPaXx0znFq2bA0hvLXJ42yImmdP88VlJqVw==", "review"=>{"thoughts"=>"Dry chicken", "rating"=>"2"}, "commit"=>"Leave Review", "restaurant_id"=>"1"}
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT  "restaurants".* FROM "restaurants" WHERE "restaurants"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `create_with_user' for #<Restaurant:0x007fa44c2f6618>
+Did you mean?  create_user):
+  
+app/controllers/reviews_controller.rb:10:in `create'
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.1ms)
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendering /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/ejatkin/.rvm/gems/ruby-2.3.1/gems/actionpack-5.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (66.2ms)
