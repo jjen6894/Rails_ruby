@@ -37,6 +37,17 @@ feature 'restaurants' do
       expect(current_path).to eq '/users/sign_in'
     end
 
+    scenario "User can add an image when creating their restaurant" do
+      sign_up
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'Nandos'
+      fill_in 'Description', with: 'Chicken'
+      page.attach_file('restaurant_image', Rails.root + 'public/system/restaurants/images/000/000/002/thumb/Nandos_logo.svg.png')
+      click_button 'Create Restaurant'
+      expect(page).to have_css("img[src*='Nandos_logo.svg.png']")
+    end
+
     context 'an invalid restaurant' do
       scenario 'does not let you submit a name that is too short' do
         sign_up
