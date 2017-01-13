@@ -20,6 +20,20 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @user ||= current_user
+    @review = Review.find(params[:id])
+      if @user.reviews.include?(@review)
+        @review.destroy
+        flash[:error] = "Restaurant deleted"
+        redirect_to '/restaurants'
+      else
+        flash[:error] = "You can only delete your own reviews"
+        redirect_to '/restaurants'
+      end
+  end
+
   private
   def review_params
     params.require(:review).permit(:thoughts, :rating)
